@@ -19,4 +19,4 @@ for k in range(y):
         while(list[h]!=0):
             h=(h+j)%y
         list[h]=x
-        print(list)
+print(list)
