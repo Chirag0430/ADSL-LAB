@@ -1,21 +1,20 @@
-inf = 999999
-N = int(input("Enter the number of vertices: "))
+INF=99
 
-G = []
+N=5
 
-for i in range(N):
-    row = list(map(int, input("Enter the row for vertex " + str(i) + ": ").split()))
-    G.append(row)
+G=[[0,19,5,0,0],
+   [19,0,5,9,2],
+   [5,5,0,1,6],
+   [0,9,1,0,1],
+   [0,2,6,1,0]]
 
-visited_node = [0] * N
-no_edge = 0
+visited_node = [0,0,0,0,0]
+no_edge=0
+visited_node[0]= True
 
-visited_node[0] = True
-# print for edge and weight
-
+print("Edge : Weight\n")
 while (no_edge < N - 1):
-
-    minimum = inf
+    minimum = INF
     a = 0
     b = 0
     for m in range(N):
