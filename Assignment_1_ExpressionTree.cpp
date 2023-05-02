@@ -1,16 +1,4 @@
-/*
-	Construct a expression tree from postfix expression
-	===================================================
-	Functions:
-		1.Create
-		2.Inorder Traversal (Recursive)
-		3.Preorder Traversal (Recursive)
-		4.Postorder Traversal (Recursive)
-		5.Inorder Traversal(N.Recursive)
-		6.Preorder Traversal(N.Recursive)
-		7.Postorder Traversal(N.Recursive)
-_____________________________________________________________________________
-*/
+
 #include<iostream>
 using namespace std;
 #include<stdlib.h>
