@@ -37,6 +37,8 @@ public:
     void inorder(node *);
     int height(node *);
     void height();
+    void printLeafNodes();
+    void printLeafNodes(node *);
 };
 
 void bst::create()
@@ -147,6 +149,28 @@ void bst::height()
     cout << "Height of the tree is: " << height(root) << endl;
 }
 
+void bst::printLeafNodes()
+{
+    cout << "Leaf Nodes: ";
+    printLeafNodes(root);
+    cout << endl;
+}
+
+void bst::printLeafNodes(node *Node)
+{
+    if (Node == NULL)
+    {
+        return;
+    }
+    if (Node->left == NULL && Node->right == NULL)
+    {
+        cout << Node->data << " ";
+        return;
+    }
+    printLeafNodes(Node->left);
+    printLeafNodes(Node->right);
+}
+
 int main()
 {
     bst b;
@@ -159,5 +183,7 @@ int main()
     b.inorder();
     cout << endl;
     b.height();
+    b.printLeafNodes();
+    
     return 0;
 }
