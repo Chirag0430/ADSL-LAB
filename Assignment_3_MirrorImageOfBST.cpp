@@ -1,28 +1,30 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 class bst;
 class node
 {
     int data;
-    node*left,*right;
+    node *left, *right;
+
 public:
     friend class bst;
     node()
     {
-        left=NULL;
-        right=NULL;
+        left = NULL;
+        right = NULL;
     }
     node(int data)
     {
-        this->data=data; 
-        left=NULL;
-        right=NULL;
+        this->data = data;
+        left = NULL;
+        right = NULL;
     }
 };
 class bst
 {
-    node* root;
-    public:
+    node *root;
+
+public:
     bst()
     {
         root = NULL;
@@ -30,60 +32,63 @@ class bst
     void create();
     bool insert(int val);
     void mirror();
-    void mirror(node*);
+    void mirror(node *);
     void inorder();
-    void inorder(node*);
+    void inorder(node *);
+    int height(node *);
+    void height();
 };
 
 void bst::create()
 {
-    int c,val;
-    cout<<"How many numbers you want to insert ?"<<endl;
-    cin>>c;
-    
-    for(int i=0;i<c;i++)
+    int c, val;
+    cout << "How many numbers you want to insert ?" << endl;
+    cin >> c;
+
+    for (int i = 0; i < c; i++)
     {
-        cout<<"Enter number : ";
-        cin>>val;
+        cout << "Enter number : ";
+        cin >> val;
         insert(val);
     }
 }
-bool bst:: insert(int data)
+bool bst::insert(int data)
 {
     node *p = new node(data);
-    if(root==NULL)
+    if (root == NULL)
     {
         root = p;
         return 1;
     }
-    node *cur=root;
-    node *par=root;
-    while(cur!=NULL)
+    node *cur = root;
+    node *par = root;
+    while (cur != NULL)
     {
-        if(data>cur->data)
+        if (data > cur->data)
         {
-            par=cur;
-            cur=cur->right;
+            par = cur;
+            cur = cur->right;
         }
-        else if(data<cur->data)
+        else if (data < cur->data)
         {
-            par=cur;
-            cur=cur->left;
+            par = cur;
+            cur = cur->left;
         }
         else
         {
-            cout<<endl<<"Already exists";
+            cout << endl
+                 << "Already exists";
             return false;
         }
     }
-    if(data>par->data)
+    if (data > par->data)
     {
-        par->right=p;
+        par->right = p;
         return true;
     }
     else
     {
-        par->left=p;
+        par->left = p;
         return true;
     }
 }
@@ -91,22 +96,21 @@ void bst::mirror()
 {
     mirror(root);
 }
-void bst:: mirror(node* Node)
+void bst::mirror(node *Node)
 {
-    if(Node==NULL)
+    if (Node == NULL)
     {
         return;
     }
     else
     {
-        struct node* temp;
+        struct node *temp;
         mirror(Node->left);
         mirror(Node->right);
 
         temp = Node->left;
-        Node->left=Node->right;
-        Node->right=temp;
-
+        Node->left = Node->right;
+        Node->right = temp;
     }
 }
 
@@ -114,24 +118,46 @@ void bst::inorder()
 {
     inorder(root);
 }
-void bst::inorder(node* Node)
+void bst::inorder(node *Node)
 {
-    if(Node)
+    if (Node)
     {
         inorder(Node->left);
-        cout<<Node->data," ";
+        cout << Node->data, " ";
         inorder(Node->right);
     }
 }
+
+int bst::height(node *Node)
+{
+    if (Node == NULL)
+    {
+        return 0;
+    }
+    else
+    {
+        int left_height = height(Node->left);
+        int right_height = height(Node->right);
+        return (max(left_height, right_height) + 1);
+    }
+}
+
+void bst::height()
+{
+    cout << "Height of the tree is: " << height(root) << endl;
+}
+
 int main()
 {
     bst b;
     b.create();
-    cout<<"Constructed inorder  : ";
+    cout << "Constructed inorder  : ";
     b.inorder();
     b.mirror();
-    cout<<endl<<"Mirror inorder : ";
+    cout << endl
+         << "Mirror inorder : ";
     b.inorder();
-
+    cout << endl;
+    b.height();
     return 0;
 }
